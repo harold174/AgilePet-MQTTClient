@@ -57,12 +57,11 @@ public class MQTTV3Sample implements MqttCallback {
 		boolean quietMode = false;
 		String action = "publish";
 		String topic = "LocalizacionMonitor";
-		Date todaysDate = new Date();
 		String message = "1080056328+3.597984985345394-74.08372812092387";
 		int qos = 0;
 		String broker = "ec2-52-87-161-155.compute-1.amazonaws.com";
 		int port = 1885;
-		int NUMBER_USERS = 1;
+		int NUMBER_USERS = 100;
 		
 		// Parse the arguments - 
 		for (int i=0; i<args.length; i++) {
@@ -138,10 +137,11 @@ public class MQTTV3Sample implements MqttCallback {
 				Long ini = new Date().getTime();
 				Long fechaMilisegundos;
 				for (int j = 0; j < NUMBER_USERS; j++) {
-					fechaMilisegundos = todaysDate.getTime();
+					fechaMilisegundos = new Date().getTime();
 					System.out.println("Fecha Milisegundos: "+fechaMilisegundos);
 					messageTmp=message+"="+fechaMilisegundos;
 					sampleClient.publish(topic,qos,messageTmp.getBytes());
+					Thread.sleep(580);
 				}
 				//Tiempo en milisegundos de finalizacion
 				Long fin = new Date().getTime();
@@ -154,6 +154,9 @@ public class MQTTV3Sample implements MqttCallback {
 			}
 		} catch(MqttException me) {
 			me.printStackTrace();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
     
