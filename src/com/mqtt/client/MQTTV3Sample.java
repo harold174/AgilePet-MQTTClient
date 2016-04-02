@@ -60,7 +60,7 @@ public class MQTTV3Sample implements MqttCallback {
 		Date todaysDate = new Date();
 		String message = "1080056328+3.597984985345394-74.08372812092387";
 		int qos = 0;
-		String broker = "ec2-52-23-209-135.compute-1.amazonaws.com";
+		String broker = "ec2-52-87-161-155.compute-1.amazonaws.com";
 		int port = 1885;
 		int NUMBER_USERS = 1;
 		
